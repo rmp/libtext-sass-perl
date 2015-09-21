@@ -13,7 +13,10 @@ endif
 all:	setup
 	./Build
 
-setup:
+versions:
+	find lib bin -type f -exec perl -i -pe 's/VERSION\s+=\s+q[[\d.]+]/VERSION = q[$(MAJOR).$(MINOR).$(PATCH)]/g' {} \;
+
+setup: versions
 	perl Build.PL
 
 manifest: setup
@@ -53,3 +56,7 @@ deb:	manifest
 	rsync --exclude .svn --exclude .git -va bin/* tmp/usr/bin/
 	find tmp -type f ! -regex '.*\(\bDEBIAN\b\|\.\bsvn\b\|\bdeb-src\b\|\.\bgit\b\|\.\bsass-cache\b\|\.\bnetbeans\b\).*'  -exec $(MD5SUM) {} \; | sed 's/tmp\///' > tmp/DEBIAN/md5sums
 	(cd tmp; fakeroot dpkg -b . ../libtext-sass-perl-$(MAJOR).$(MINOR)-$(PATCH)~$(CODENAME).deb)
+
+cpan:	clean
+	make dist
+	cpan-upload Text-Sass-gz

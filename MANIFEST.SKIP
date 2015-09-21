@@ -11,3 +11,6 @@ MANIFEST.bak
 .deb$
 .tar.gz$
 .rpm$
+Text-Sass
+cover_db
+tmp

@@ -1,3 +1,4 @@
+*.gz
 /blib/
 /.build/
 _build/
@@ -17,3 +18,4 @@ nytprof.out
 *.o
 *.bs
 /_eumm/
+tmp
