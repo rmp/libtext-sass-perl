@@ -1,0 +1,10 @@
+Package: libtext-sass-perl
+Version: MAJOR.MINOR-PATCH~CODENAME
+Section: base
+Priority: optional
+Architecture: all
+Source: lib-text-sass-perl
+Depends: libreadonly-perl,libconvert-color-perl,libdata-dumper-perl
+Recommends: libtest-perl-critic-perl, libtest-pod-coverage-perl, libtest-pod-perl,libtry-tiny-perl
+Maintainer: Roger Pettett <rmp@psyphi.net>
+Description: Naive implementation of Sass/SCSS preprocessor
