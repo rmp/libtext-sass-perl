@@ -25,7 +25,7 @@ manifest: setup
 clean:	setup
 	./Build clean
 	touch tmp
-	rm -rf build.tap *META*yml _build Build blib cover_db
+	rm -rf build.tap *META*yml _build Build blib cover_db *gz *deb *rpm tmp MANIFEST.bak
 
 test:	all
 	TEST_AUTHOR=1 ./Build test verbose=1

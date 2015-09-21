@@ -42,3 +42,5 @@ t/RT-80831-commasep-selectors.t
 t/RT-80927-nested-includes.t
 t/RT-80978-nested-ampersand-includes.t
 tmp
+META.yml
+META.json
