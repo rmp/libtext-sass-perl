@@ -59,4 +59,4 @@ deb:	manifest
 
 cpan:	clean
 	make dist
-	cpan-upload Text-Sass-gz
+	cpan-upload Text-Sass-v$(MAJOR).$(MINOR).$(PATCH).tar.gz
