@@ -1,1 +1,13 @@
+^MYMETA.json$
 ^MYMETA.yml$
+^META.json$
+^META.yml$
+.git
+.svn
+_build
+blib
+^Build$
+MANIFEST.bak
+.deb$
+.tar.gz$
+.rpm$

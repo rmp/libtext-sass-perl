@@ -18,9 +18,11 @@ use English qw(-no_match_vars);
 use Text::Sass::Expr;
 use Text::Sass::Functions;
 use Data::Dumper;
+use Readonly;
 
 our $VERSION = q[0.97];
 our $DEBUG   = 0;
+Readonly::Scalar our $DEBUG_SEPARATOR => 30;
 
 sub new {
   my ($class, $ref) = @_;
@@ -76,7 +78,7 @@ sub scss2css {
 
 sub _parse_sass {
   my ($self, $str, $substash, $symbols, $chain) = @_;
-  $DEBUG and print {*STDERR} q[=]x30, q[begin _parse_sass], q[=]x30, "\n";
+  $DEBUG and print {*STDERR} q[=]x$DEBUG_SEPARATOR, q[begin _parse_sass], q[=]x$DEBUG_SEPARATOR, "\n";
 
   #########
   # insert blank links after code2:
@@ -98,7 +100,7 @@ sub _parse_sass {
     $self->_parse_sass_group($substash, $symbols, $chain, $g);
   }
 
-  $DEBUG and print {*STDERR} q[=]x30, q[ end _parse_sass ], q[=]x30, "\n";
+  $DEBUG and print {*STDERR} q[=]x$DEBUG_SEPARATOR, q[ end _parse_sass ], q[=]x$DEBUG_SEPARATOR, "\n";
 
   return 1;
 }
