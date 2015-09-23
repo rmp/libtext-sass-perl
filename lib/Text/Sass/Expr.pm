@@ -12,7 +12,7 @@ use warnings;
 use Carp;
 use Readonly;
 
-our $VERSION = 0.1;
+our $VERSION = q[0.99.0];
 
 Readonly::Scalar our $SHADE_MAX => 255;
 
