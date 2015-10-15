@@ -36,6 +36,16 @@ my $builder = Module::Build->new(
 							 'Test::Distribution'      => '2.00',
 							 'Test::Perl::Critic'      => '1.01',
 							},
+				 'meta_merge' => {
+							 'keywords' => [
+								 'Sass',
+								 'SCSS',
+								 'CSS',
+							 ],
+							 'resources' => {
+								 'repository' => 'https://github.com/rmp/libtext-sass-perl'
+							 }
+				 },
 				 script_files        => qw(bin/sass2css.pl),
 #				 sign                => 1,
 				);
