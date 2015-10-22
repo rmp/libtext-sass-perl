@@ -20,7 +20,7 @@ use Text::Sass::Functions;
 use Data::Dumper;
 use Readonly;
 
-our $VERSION = q[0.99.0];
+our $VERSION = q[1.0.0];
 our $DEBUG   = 0;
 Readonly::Scalar our $DEBUG_SEPARATOR => 30;
 
