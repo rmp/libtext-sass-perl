@@ -431,7 +431,7 @@ sub _parse_css {
   #########
   # scss definitions
   #
-  $str =~ s{^\s*\$(\S+)\s*:\s*(.*?)\;}{
+  $str =~ s{^\s*\$(\S+)\s*:\s*(.*?)\s*\;}{
     $symbols->{variables}->{$1} = $2;
     $DEBUG and carp qq[VARIABLE $1 = $2];
    q[];

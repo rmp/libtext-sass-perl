@@ -39,11 +39,8 @@ $margin: 16px
 }
 EOT
 
-  SKIP: {
-    skip "Whitespaces between value and semicolon are not stripped yet", 1;
-    my $ts = Text::Sass->new();
-    is($ts->scss2css($scss), $css, "line break after scss variable declaration");
-  }
+  my $ts = Text::Sass->new();
+  is($ts->scss2css($scss), $css, "line break after scss variable declaration");
 }
 
 {
