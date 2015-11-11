@@ -14,7 +14,7 @@ use Test::More tests => 39;
 use_ok('Text::Sass::Functions');
 # $Text::Sass::DEBUG = 1;
 
-my $cf = Text::Sass::Functions->new;
+my $cf = 'Text::Sass::Functions';
 
 {
   isa_ok($cf, 'Text::Sass::Functions');

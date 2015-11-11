@@ -20,9 +20,28 @@ use Text::Sass::Functions;
 use Data::Dumper;
 use Readonly;
 
-our $VERSION = q[1.0.0];
-our $DEBUG   = 0;
+our $VERSION = q[1.0.1];
+our $DEBUG     = 0;
+our $FUNCTIONS = [qw(Text::Sass::Functions)];
+
 Readonly::Scalar our $DEBUG_SEPARATOR => 30;
+
+sub import {
+  my ($class, @args) = @_;
+
+  if(!scalar @args % 2) {
+    my $args = {@args};
+    if($args->{Functions}) {
+      for my $functions (@{$args->{Functions}}) {
+        eval "require $functions" or carp qq[Could not require $functions: $EVAL_ERROR];
+
+        push @{$FUNCTIONS}, $functions;
+      }
+    }
+  }
+
+  return 1;
+}
 
 sub new {
   my ($class, $ref) = @_;
@@ -629,11 +648,10 @@ sub _expr {
   $expr =~ s/\!(\S+)/{$vars->{$1}||"\!$1"}/smxeg;
   $expr =~ s/\$(\S+)/{$vars->{$1}||"\$$1"}/smxeg;
 
+  # TODO: should have lwp, so that url() will work
+
   {
     # Functions
-    my $functions = Text::Sass::Functions->new;
-
-    # TODO: should have rest, so that url() will work
 
     while ($expr =~ /^(.*?)((\S+)\s*[(]([^)]+)[)](.*)$)/smx) {
       my $start  = $1;
@@ -646,17 +664,19 @@ sub _expr {
       # We want hyphenated 'adjust-hue' to work
       #
       $func =~ s/\-/_/gsmx;
-      if (!$functions->can($func)) {
+      my ($implementor) = [grep { $_->can($func); } @{$FUNCTIONS}]->[0];
+
+      if (!$implementor) {
         $start = $self->_expr($stash, $symbols, $start);
         $end   = $self->_expr($stash, $symbols, $end);
 
-	#########
-	# not happy with this here. It probably at least belongs in Expr
-	# - and should include any other CSS stop-words
-	#
-	if($end =~ /repeat|left|top|right|bottom/smx) { ## no-repeat, repeat-x, repeat-y
-	  $end = q[];
-	}
+        #########
+        # not happy with this here. It probably at least belongs in Expr
+        # - and should include any other CSS stop-words
+        #
+        if($end =~ /repeat|left|top|right|bottom/smx) { ## no-repeat, repeat-x, repeat-y
+          $end = q[];
+        }
 
         $expr  = $start . $mstr . $end;
         last;
@@ -671,8 +691,9 @@ sub _expr {
 	$var = $self->_expr($stash, $symbols, $var);
       }
 
-      my $res = $functions->$func(@vars);
-      $expr =~ s/\Q$mstr\E/$res/smx
+      my $res = $implementor->$func(@vars);
+      $expr =~ s/\Q$mstr\E/$res/smx;
+      last;
     }
   }
 
