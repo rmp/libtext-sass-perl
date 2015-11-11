@@ -428,16 +428,20 @@ sub _parse_css {
   my ($self, $str, $substash, $symbols) = @_;
   $str =~ s{/[*].*?[*]/}{}smxg;
 
+  # Normalize line breaks
+  $str =~ s/\n//sg; ## no critic (RegularExpressions)
+  $str =~ s/;/;\n/sg; ## no critic (RegularExpressions)
+  $str =~ s/{/{\n/sg; ## no critic (RegularExpressions)
+  $str =~ s/}/}\n/sg; ## no critic (RegularExpressions)
+
   #########
   # scss definitions
   #
-  while (my ($def) = ( $str =~ m{^\s*(\$[^\n]*)\;}smx )) {
-    $str =~ s{^\s*\$(\S+)\s*:\s*(.*?)\;}{
-      $symbols->{variables}->{$1} = $2;
-      $DEBUG and carp qq[VARIABLE $1 = $2];
-     q[];
-    }smxegi;
-  }
+  $str =~ s{^\s*\$(\S+)\s*:\s*(.*?)\s*\;}{
+    $symbols->{variables}->{$1} = $2;
+    $DEBUG and carp qq[VARIABLE $1 = $2];
+   q[];
+  }smxegi;
 
   my $groups = $self->_css_nestedgroups($str);
 
