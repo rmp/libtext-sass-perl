@@ -429,10 +429,10 @@ sub _parse_css {
   $str =~ s{/[*].*?[*]/}{}smxg;
 
   # Normalize line breaks
-  $str =~ s/\n//sg;
-  $str =~ s/;/;\n/sg;
-  $str =~ s/{/{\n/sg;
-  $str =~ s/}/}\n/sg;
+  $str =~ s/\n//sg; ## no critic (RegularExpressions)
+  $str =~ s/;/;\n/sg; ## no critic (RegularExpressions)
+  $str =~ s/{/{\n/sg; ## no critic (RegularExpressions)
+  $str =~ s/}/}\n/sg; ## no critic (RegularExpressions)
 
   #########
   # scss definitions
