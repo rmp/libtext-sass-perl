@@ -1,5 +1,7 @@
 Changelog for Text-Sass
 
+1.0.0 - PR#2 (annulen:multiline_var) from Konstantin Tokarev
+
 0.97 - #80831 comma-separated selectors from BGRIMM
        #80927 scss to css for nested includes from BGRIMM
 
