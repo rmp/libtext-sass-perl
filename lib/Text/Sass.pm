@@ -428,6 +428,12 @@ sub _parse_css {
   my ($self, $str, $substash, $symbols) = @_;
   $str =~ s{/[*].*?[*]/}{}smxg;
 
+  # Normalize line breaks
+  $str =~ s/\n//sg;
+  $str =~ s/;/;\n/sg;
+  $str =~ s/{/{\n/sg;
+  $str =~ s/}/}\n/sg;
+
   #########
   # scss definitions
   #

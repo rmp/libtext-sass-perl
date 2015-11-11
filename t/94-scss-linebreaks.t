@@ -5,7 +5,7 @@
 use strict;
 use warnings;
 use Text::Sass;
-use Test::More tests => 5;
+use Test::More tests => 6;
 
 # $Text::Sass::DEBUG = 1;
 
@@ -84,3 +84,20 @@ EOT
   is($ts->scss2css($scss), $css, "line break in property declaration with variable");
 }
 
+{
+  my $scss = <<'EOT';
+$margin: 16px;
+.title {
+  margin:
+    foo(
+      $margin: 1
+    );
+}
+.border {
+  margin: $margin;
+}
+EOT
+
+  my $ts = Text::Sass->new();
+  like($ts->scss2css($scss), qr/\Q$css\E/, "line break in property declaration with variable");
+}
