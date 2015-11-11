@@ -33,7 +33,7 @@ sub import {
     my $args = {@args};
     if($args->{Functions}) {
       for my $functions (@{$args->{Functions}}) {
-        eval "require $functions" or carp qq[Could not require $functions: $EVAL_ERROR];
+        eval "require $functions" or carp qq[Could not require $functions: $EVAL_ERROR]; ## no critic (ProhibitStringyEval)
 
         push @{$FUNCTIONS}, $functions;
       }

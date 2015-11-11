@@ -27,7 +27,7 @@ li {
   content: funky bla;
 }
 EOT
-    
+
 {
   my $ts = Text::Sass->new();
   is($ts->sass2css($scss), $css, "custom function");
