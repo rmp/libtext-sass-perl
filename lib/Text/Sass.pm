@@ -24,6 +24,17 @@ our $VERSION = q[1.0.0];
 our $DEBUG   = 0;
 Readonly::Scalar our $DEBUG_SEPARATOR => 30;
 
+{
+  package TOKEN;
+  use Readonly;
+
+  # TODO: Use token patterns from original sass and use them consistently
+
+  Readonly our $ESCAPE => qr/\\./;
+  Readonly our $NMCHAR => qr/[^\s:\\]|$ESCAPE/;
+  Readonly our $IDENT  => qr/(?:$NMCHAR)+/;
+}
+
 sub new {
   my ($class, $ref) = @_;
 
@@ -626,8 +637,11 @@ sub _expr {
   my ($self, $stash, $symbols, $expr) = @_;
   my $vars = $symbols->{variables} || {};
 
-  $expr =~ s/\!(\S+)/{$vars->{$1}||"\!$1"}/smxeg;
-  $expr =~ s/\$(\S+)/{$vars->{$1}||"\$$1"}/smxeg;
+  #########
+  # Do variable expansion
+  #
+  $expr =~ s/\!($TOKEN::IDENT)/{$vars->{$1}||"\!$1"}/smxeg;
+  $expr =~ s/\$($TOKEN::IDENT)/{$vars->{$1}||"\$$1"}/smxeg;
 
   {
     # Functions
