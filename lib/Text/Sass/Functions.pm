@@ -15,19 +15,8 @@ use Text::Sass::Expr;
 use POSIX qw();
 use Readonly;
 
-our $VERSION = q[1.0.0];
+our $VERSION = q[1.0.1];
 Readonly::Scalar my $PERC => 100;
-
-sub new {
-  my ($class, $ref) = @_;
-
-  if(!$ref) {
-    $ref = {};
-  }
-
-  bless $ref, $class;
-  return $ref;
-}
 
 sub _color {
   my ($self, $color) = @_;
@@ -254,7 +243,6 @@ sub percentage {
   return ($num * $PERC) . q[%];
 }
 
-
 sub round {
   my ($self, $str) = @_;
 
@@ -319,10 +307,6 @@ $LastChangedRevision: 71 $
 =head1 DESCRIPTION
 
 =head1 SUBROUTINES/METHODS
-
-=head2 new
-
-Creates a new object.
 
 =head2 rgb(red, green, blue)
 
