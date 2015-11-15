@@ -9,7 +9,7 @@
 use strict;
 use warnings;
 use Text::Sass;
-use Test::More tests => 1;
+use Test::More tests => 2;
 
 {
   my $sass_str = <<"EOT";
@@ -40,5 +40,24 @@ EOT
 EOT
 
   my $sass = Text::Sass->new();
-  is($sass->sass2css($sass_str), $css_str, 'sass2css');
+  is($sass->sass2css($sass_str), $css_str, 'sass variables');
 }
+
+{
+  my $sass_str = <<'EOT';
+!blue\: = #3bbfce
+
+.content_navigation
+  border-color = !blue\:
+EOT
+
+  my $css_str = <<"EOT";
+.content_navigation {
+  border-color: #3bbfce;
+}
+EOT
+
+  my $sass = Text::Sass->new();
+  is($sass->sass2css($sass_str), $css_str, 'sass variable with escaped colon in name');
+}
+

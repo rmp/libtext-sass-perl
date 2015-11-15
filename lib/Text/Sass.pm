@@ -17,10 +17,11 @@ use Carp;
 use English qw(-no_match_vars);
 use Text::Sass::Expr;
 use Text::Sass::Functions;
+use Text::Sass::Token;
 use Data::Dumper;
 use Readonly;
 
-our $VERSION = q[1.0.2];
+our $VERSION = q[1.0.3];
 our $DEBUG     = 0;
 our $FUNCTIONS = [qw(Text::Sass::Functions)];
 
@@ -645,8 +646,11 @@ sub _expr {
   my ($self, $stash, $symbols, $expr) = @_;
   my $vars = $symbols->{variables} || {};
 
-  $expr =~ s/\!(\S+)/{$vars->{$1}||"\!$1"}/smxeg;
-  $expr =~ s/\$(\S+)/{$vars->{$1}||"\$$1"}/smxeg;
+  #########
+  # Do variable expansion
+  #
+  $expr =~ s/\!($Text::Sass::Token::IDENT)/{$vars->{$1}||"\!$1"}/smxeg;
+  $expr =~ s/\$($Text::Sass::Token::IDENT)/{$vars->{$1}||"\$$1"}/smxeg;
 
   # TODO: should have lwp, so that url() will work
 
