@@ -742,6 +742,10 @@ __END__
 
 Text::Sass - A Naieve Perl implementation of Sass & SCSS.
 
+=head1 VERSION
+
+See Text/Sass.pm
+
 =head1 SYNOPSIS
 
   use Text::Sass;
@@ -796,9 +800,9 @@ L<Sass project page|http://sass-lang.com>
 
 =over
 
-=item L<Readonly>
+=item L<Readonly|Readonly>
 
-=item L<Convert::Color>
+=item L<Convert::Color|Convert::Color>
 
 =back
 
@@ -812,17 +816,25 @@ See README
 
 =head1 SEE ALSO
 
-L<Text::Sass::XS> - Perl binding for libsass. Consider using it if
+L<Text::Sass::XS|Text::Sass::XS> - Perl binding for libsass. Consider using it if
 you need higher level of language conformance and/or faster execution.
 
-L<CSS::Sass> - Yet another libsass binding.
+L<CSS::Sass|CSS::Sass> - Yet another libsass binding.
 
-L<Plack::Middleware::File::Sass> - Sass and SCSS support for all
+L<Plack::Middleware::File::Sass|Plack::Middleware::File::Sass> - Sass and SCSS support for all
 Plack frameworks. Can use this module as one of its backends.
 
 =head1 AUTHOR
 
 Roger Pettett E<lt>rmp@psyphi.netE<gt>
+
+=head1 DIAGNOSTICS
+
+ Set $Text::Sass::DEBUG = 1;
+
+=head1 CONFIGURATION AND ENVIRONMENT
+
+Nothing required beyond $DEBUG
 
 =head1 LICENSE AND COPYRIGHT
 
