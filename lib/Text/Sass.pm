@@ -740,15 +740,39 @@ __END__
 
 =head1 NAME
 
-Text::Sass
-
-=head1 VERSION
-
-$LastChangedRevision: 75 $
+Text::Sass - A Naieve Perl implementation of Sass & SCSS.
 
 =head1 SYNOPSIS
 
+  use Text::Sass;
+
+  my $sass = Text::Sass->new();
+
+  print $sass->sass2css(<<'EOF');
+  $font-stack:    Helvetica, sans-serif
+  $primary-color: #333
+
+  body
+    font: 100% $font-stack
+    color: $primary-color
+  EOF
+
+  print $sass->scss2css(<<'EOF');
+  $font-stack:    Helvetica, sans-serif;
+  $primary-color: #333;
+
+  body {
+    font: 100% $font-stack;
+    color: $primary-color;
+  }
+  EOF
+
 =head1 DESCRIPTION
+
+This is a pure perl implementation of Sass and SCSS languages.
+Currently it implements only a subset of the specification.
+
+L<Sass project page|http://sass-lang.com>
 
 =head1 SUBROUTINES/METHODS
 
@@ -768,39 +792,37 @@ $LastChangedRevision: 75 $
 
   my $sCSS = $oSass->scss2css($sScss);
 
-=head1 DIAGNOSTICS
-
-=head1 CONFIGURATION AND ENVIRONMENT
-
 =head1 DEPENDENCIES
 
 =over
 
-=item strict
+=item L<Readonly>
 
-=item warnings
-
-=item Carp
-
-=item English
-
-=item Text::Sass::Expr
-
-=item Text::Sass::Functions
-
-=item Data::Dumper
+=item L<Convert::Color>
 
 =back
 
 =head1 INCOMPATIBILITIES
 
+All variables are currently global. This can be quite unpleasant.
+
 =head1 BUGS AND LIMITATIONS
 
 See README
 
+=head1 SEE ALSO
+
+L<Text::Sass::XS> - Perl binding for libsass. Consider using it if
+you need higher level of language conformance and/or faster execution.
+
+L<CSS::Sass> - Yet another libsass binding.
+
+L<Plack::Middleware::File::Sass> - Sass and SCSS support for all
+Plack frameworks. Can use this module as one of its backends.
+
 =head1 AUTHOR
 
-$Author: Roger Pettett$
+Roger Pettett E<lt>rmp@psyphi.netE<gt>
 
 =head1 LICENSE AND COPYRIGHT
 
