@@ -20,7 +20,7 @@ use Text::Sass::Functions;
 use Data::Dumper;
 use Readonly;
 
-our $VERSION = q[1.0.1];
+our $VERSION = q[1.0.2];
 our $DEBUG     = 0;
 our $FUNCTIONS = [qw(Text::Sass::Functions)];
 
