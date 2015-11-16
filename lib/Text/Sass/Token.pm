@@ -19,6 +19,11 @@ Readonly our $ESCAPE => qr/\\./smx;
 Readonly our $NMCHAR => qr/[^\s:\\]|$ESCAPE/smx;
 Readonly our $IDENT  => qr/(?:$NMCHAR)+/smx;
 
+# Next patterns are already consistent with Sass
+
+Readonly our $COMMENT => qr{/\*([^*]|\*+[^/*])*\**\*/}smx;
+Readonly our $SINGLE_LINE_COMMENT => qr{//.*(\n[ \t]*//.*)*}m;
+
 1;
 __END__
 

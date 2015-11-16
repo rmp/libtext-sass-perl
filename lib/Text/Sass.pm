@@ -446,7 +446,13 @@ sub _css_kvs {
 
 sub _parse_css {
   my ($self, $str, $substash, $symbols) = @_;
-  $str =~ s{/[*].*?[*]/}{}smxg;
+
+  #########
+  # /* comment */
+  # // comment
+  #
+  $str =~ s{$Text::Sass::Token::COMMENT}{}smxg;
+  $str =~ s{$Text::Sass::Token::SINGLE_LINE_COMMENT}{}smxg;
 
   # Normalize line breaks
   $str =~ s/\n//sg; ## no critic (RegularExpressions)
