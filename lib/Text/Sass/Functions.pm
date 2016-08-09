@@ -15,7 +15,7 @@ use Text::Sass::Expr;
 use POSIX qw();
 use Readonly;
 
-our $VERSION = q[1.0.3];
+our $VERSION = q[1.0.4];
 Readonly::Scalar my $PERC => 100;
 
 sub _color {

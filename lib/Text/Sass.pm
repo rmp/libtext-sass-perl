@@ -21,7 +21,7 @@ use Text::Sass::Token;
 use Data::Dumper;
 use Readonly;
 
-our $VERSION = q[1.0.3];
+our $VERSION = q[1.0.4];
 our $DEBUG     = 0;
 our $FUNCTIONS = [qw(Text::Sass::Functions)];
 

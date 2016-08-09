@@ -1,5 +1,7 @@
 Changelog for Text-Sass
 
+1.0.4 - support single-line comments from Konstantin Tokarev
+
 1.0.1 - support custom functions.
   use Text::Sass Functions => [qw(package package)];
 

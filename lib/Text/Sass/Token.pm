@@ -11,7 +11,7 @@ use strict;
 use warnings;
 use Readonly;
 
-our $VERSION = q[1.0.3];
+our $VERSION = q[1.0.4];
 
 # TODO: Use token patterns from original sass and use them consistently
 
@@ -21,8 +21,8 @@ Readonly our $IDENT  => qr/(?:$NMCHAR)+/smx;
 
 # Next patterns are already consistent with Sass
 
-Readonly our $COMMENT => qr{/\*([^*]|\*+[^/*])*\**\*/}smx;
-Readonly our $SINGLE_LINE_COMMENT => qr{//.*(\n[ \t]*//.*)*}m;
+Readonly our $COMMENT             => qr{/[*]([^*]|[*]+[^*])*[*]*[*]/}smx;
+Readonly our $SINGLE_LINE_COMMENT => qr{\s//.*}mx; ## no critic (RequireDotMatchAnything)
 
 1;
 __END__
