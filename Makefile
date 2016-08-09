@@ -1,6 +1,7 @@
 MAJOR    ?= 1
 MINOR    ?= 0
-PATCH    ?= 4
+SUB      ?= 4
+PATCH    ?= 1
 CODENAME ?= $(shell lsb_release -cs)
 MD5SUM    = md5sum
 SEDI      = sed -i
@@ -55,7 +56,7 @@ deb:	manifest
 	rsync --exclude .svn --exclude .git -va lib/* tmp/usr/lib/perl5/
 	rsync --exclude .svn --exclude .git -va bin/* tmp/usr/bin/
 	find tmp -type f ! -regex '.*\(\bDEBIAN\b\|\.\bsvn\b\|\bdeb-src\b\|\.\bgit\b\|\.\bsass-cache\b\|\.\bnetbeans\b\).*'  -exec $(MD5SUM) {} \; | sed 's/tmp\///' > tmp/DEBIAN/md5sums
-	(cd tmp; fakeroot dpkg -b . ../libtext-sass-perl-$(MAJOR).$(MINOR)-$(PATCH)~$(CODENAME).deb)
+	(cd tmp; fakeroot dpkg -b . ../libtext-sass-perl-$(MAJOR).$(MINOR).$(SUB)-$(PATCH).deb)
 
 cpan:	clean
 	make dist

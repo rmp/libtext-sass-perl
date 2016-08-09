@@ -1,5 +1,5 @@
 Package: libtext-sass-perl
-Version: MAJOR.MINOR-PATCH~CODENAME
+Version: MAJOR.MINOR.SUB-PATCH
 Section: base
 Priority: optional
 Architecture: all
