@@ -19,6 +19,7 @@ t/00-pod.t
 t/00-podcoverage.t
 t/05-expr.t
 t/10-beauty.t
+t/10-comments.t
 t/20-nesting.t
 t/21-nesting.t
 t/22-deep.t
